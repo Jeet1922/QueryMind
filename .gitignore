@@ -1,0 +1,29 @@
+# General
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / frontend
+node_modules/
+dist/
+build/
+
+# Databases / generated data
+*.sqlite3
+*.db
+*.dump
+large_data/
+*.csv
+
+# OS
+.DS_Store
+Thumbs.db

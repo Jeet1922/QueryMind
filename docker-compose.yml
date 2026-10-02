@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: insightmesh-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-insightmesh}
+      POSTGRES_USER: ${POSTGRES_USER:-insightmesh}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-insightmesh}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: insightmesh-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://insightmesh:insightmesh@postgres:5432/insightmesh}
+      APP_ENV: ${APP_ENV:-development}
+    ports:
+      - "8000:8000"
+    command: ["python", "-m", "http.server", "8000", "--directory", "/workspace"]
+
+volumes:
+  postgres_data:
