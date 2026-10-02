@@ -1,1 +1,1 @@
-"""InsightMesh backend package."""
+"""QueryMind backend package."""

@@ -8,7 +8,7 @@ from datetime import date, datetime, timedelta, timezone
 import psycopg
 
 
-DEFAULT_DSN = "postgresql://insightmesh:insightmesh@localhost:5432/insightmesh"
+DEFAULT_DSN = "postgresql://querymind:querymind@localhost:5432/querymind"
 SCALE_CONFIG = {
     "small": 10_000,
     "medium": 1_000_000,

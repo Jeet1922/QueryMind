@@ -1,6 +1,11 @@
-import os
-
 import psycopg
+import pytest
+
+from backend.app.db.dsn import get_postgres_url
+
+
+DATABASE_URL = get_postgres_url()
+pytestmark = pytest.mark.skipif(DATABASE_URL is None, reason="A valid PostgreSQL DATABASE_URL is required for database integration tests.")
 
 
 REQUIRED_TABLES = {
@@ -22,11 +27,7 @@ REQUIRED_TABLES = {
 
 
 def get_connection():
-    dsn = os.getenv(
-        "DATABASE_URL",
-        "postgresql://insightmesh:insightmesh@localhost:5432/insightmesh",
-    )
-    return psycopg.connect(dsn)
+    return psycopg.connect(DATABASE_URL)
 
 
 def test_required_tables_exist():

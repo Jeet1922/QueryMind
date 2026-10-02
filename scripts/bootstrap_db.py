@@ -11,6 +11,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import psycopg
+from dotenv import load_dotenv
+from backend.app.db.dsn import get_postgres_url
 
 from data_generator.generate_ml_outputs import generate_ml_outputs
 from data_generator.generate_reference_data import generate_reference_data
@@ -18,10 +20,11 @@ from data_generator.generate_usage_data import generate_usage_data
 
 
 def get_dsn() -> str:
-    return os.getenv(
-        "DATABASE_URL",
-        "postgresql://insightmesh:insightmesh@localhost:5432/insightmesh",
-    )
+    load_dotenv(ROOT / ".env")
+    dsn = get_postgres_url(os.getenv("DATABASE_URL"))
+    if not dsn:
+        raise RuntimeError("Set a valid Neon/PostgreSQL DATABASE_URL in the environment or repo-root .env file.")
+    return dsn
 
 
 def split_sql_statements(sql: str) -> list[str]:
@@ -69,11 +72,11 @@ def bootstrap_database(scale: str = "small") -> None:
         generate_ml_outputs(conn)
         conn.commit()
 
-    print(f"Bootstrapped InsightMesh database with scale={scale}.")
+    print(f"Bootstrapped QueryMind database with scale={scale}.")
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Initialize the InsightMesh PostgreSQL schema and seed data.")
+    parser = argparse.ArgumentParser(description="Initialize the QueryMind PostgreSQL schema and seed data.")
     parser.add_argument(
         "--scale",
         choices=["small", "medium", "large"],

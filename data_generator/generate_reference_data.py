@@ -6,7 +6,7 @@ from datetime import date
 import psycopg
 
 
-DEFAULT_DSN = "postgresql://insightmesh:insightmesh@localhost:5432/insightmesh"
+DEFAULT_DSN = "postgresql://querymind:querymind@localhost:5432/querymind"
 
 
 def generate_reference_data(conn: psycopg.Connection) -> None:
@@ -30,7 +30,7 @@ def generate_reference_data(conn: psycopg.Connection) -> None:
         ("GitHub Copilot", "GitHub", "Developer Tool", "Coding assistance built into the developer workflow.", date(2021, 10, 29), "active"),
         ("Claude", "Anthropic", "Research Assist", "Long-context analysis and drafting assistant.", date(2023, 3, 14), "active"),
         ("Gemini", "Google", "General AI", "AI workspace and research companion.", date(2023, 12, 6), "active"),
-        ("Internal AI Assistant", "InsightMesh Labs", "Internal AI", "Synthetic internal AI service used by employees.", date(2024, 5, 7), "active"),
+        ("Internal AI Assistant", "QueryMind Labs", "Internal AI", "Synthetic internal AI service used by employees.", date(2024, 5, 7), "active"),
     ]
 
     tasks = [

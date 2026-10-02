@@ -6,7 +6,7 @@ from datetime import date, timedelta
 import psycopg
 
 
-DEFAULT_DSN = "postgresql://insightmesh:insightmesh@localhost:5432/insightmesh"
+DEFAULT_DSN = "postgresql://querymind:querymind@localhost:5432/querymind"
 
 
 def _fetch_tool_ids(conn: psycopg.Connection) -> list[int]:

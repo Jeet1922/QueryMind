@@ -6,6 +6,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.tsbuildinfo
 
 # Python
 .pytest_cache/
@@ -16,6 +17,8 @@ __pycache__/
 node_modules/
 dist/
 build/
+/frontend/vite.config.js
+/frontend/vite.config.d.ts
 
 # Databases / generated data
 *.sqlite3
