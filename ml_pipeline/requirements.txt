@@ -1,0 +1,14 @@
+# QueryMind ML pipeline dependencies.
+# Install into a dedicated environment from ml_pipeline/:
+#   python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
+# Kept separate from the repository root requirements.txt on purpose: the
+# application never installs these; training lives outside the app boundary.
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+joblib>=1.3
+psycopg[binary]>=3.2.1
+python-dotenv>=1.0.1
+# Notebook extras
+matplotlib>=3.7
+jupyterlab>=4.0

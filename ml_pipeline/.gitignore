@@ -1,0 +1,7 @@
+.venv/
+.pgtest/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+artifacts/
+reports/
